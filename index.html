@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ovozli Hariflar</title>
+<style>
+    .char {
+        display: inline-block;
+        margin: 5px;
+        font-size: 24px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <div id="text-to-read">Salom dunyo!</div>
 
+    <script>
+        const textToRead = document.getElementById('text-to-read');
+        
+        textToRead.innerHTML = textToRead.textContent.replace(/\S/g, "<span class='char'>$&</span>");
+        
+        const chars = document.querySelectorAll('.char');
+        
+        chars.forEach(char => {
+            char.addEventListener('click', () => {
+                speak(char.textContent);
+            });
+        });
+        
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
